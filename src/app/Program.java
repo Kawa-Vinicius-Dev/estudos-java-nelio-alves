@@ -1,7 +1,10 @@
 package app;
 
 import entities.Employee;
+import services.PensionService;
 import services.SalaryService;
+import services.TaxService;
+
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -17,7 +20,9 @@ public class Program {
 
         Employee employee = new Employee(name,grossSalary);
 
-        SalaryService salaryService = new SalaryService();
+        TaxService taxService = new TaxService();
+        PensionService pensionService = new PensionService();
+        SalaryService salaryService = new SalaryService(taxService,pensionService);
 
         double netSalary = salaryService.netSalary(employee);
         System.out.printf("Salario liquido: %.2f%n", netSalary);
